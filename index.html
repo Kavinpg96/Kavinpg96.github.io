@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Associate Software Engineer</title>
+    <style>
+        /* Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        :root {
+            --dark-blue: #0a192f;
+            --light-blue: #64ffda;
+            --slate: #8892b0;
+            --lightest-slate: #ccd6f6;
+            --transition: all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        
+        body {
+            background-color: var(--dark-blue);
+            color: var(--lightest-slate);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Fade animations - Enhanced visibility */
+        .page {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            min-height: 100vh;
+            padding: 80px 10%;
+        }
+        
+        .page.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(10, 25, 47, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 10%;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--light-blue);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--lightest-slate);
+            font-weight: 500;
+            position: relative;
+            transition: var(--transition);
+            font-size: 18px;
+        }
+        
+        .nav-links a:hover {
+            color: var(--light-blue);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--light-blue);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-text h1 {
+            font-size: clamp(40px, 6vw, 72px);
+            color: var(--light-blue);
+            margin-bottom: 15px;
+            line-height: 1.1;
+        }
+        
+        .hero-text h2 {
+            font-size: clamp(22px, 4vw, 36px);
+            color: var(--slate);
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        
+        .hero-text p {
+            font-size: clamp(16px, 2vw, 18px);
+            margin-bottom: 35px;
+            color: var(--slate);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Animated buttons */
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            color: var(--light-blue);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--light-blue);
+            background: transparent;
+            transition: var(--transition);
+            z-index: 1;
+            font-size: clamp(14px, 2vw, 16px);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(100, 255, 218, 0.1);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .btn:hover {
+            color: var(--dark-blue);
+        }
+        
+        .btn:hover::before {
+            left: 0;
+            background: var(--light-blue);
+        }
+        
+        /* About Section */
+        #about {
+            background-color: var(--dark-blue);
+        }
+        
+        .section-title {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-title h2 {
+            font-size: clamp(28px, 5vw, 36px);
+            color: var(--lightest-slate);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 1px;
+            background-color: var(--slate);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 1px;
+            background-color: var(--light-blue);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--slate);
+            line-height: 1.8;
+            font-size: clamp(16px, 2vw, 18px);
+        }
+        
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-blue);
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.4);
+        }
+        
+        /* Education Section - Split Layout */
+        #education {
+            background-color: #0a192f;
+        }
+        
+        .education-container {
+            display: flex;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .education-column {
+            flex: 1;
+        }
+        
+        .education-item {
+            margin-bottom: 40px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .education-item::before {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background-color: var(--light-blue);
+            left: 0;
+            top: 10px;
+        }
+        
+        .education-date {
+            color: var(--light-blue);
+            margin-bottom: 10px;
+            font-size: clamp(16px, 2vw, 18px);
+        }
+        
+        .education-item h3 {
+            color: var(--lightest-slate);
+            margin-bottom: 10px;
+            font-size: clamp(20px, 3vw, 24px);
+        }
+        
+        .education-item h4 {
+            color: var(--light-blue);
+            margin-bottom: 15px;
+            font-weight: 500;
+            font-size: clamp(16px, 2vw, 18px);
+        }
+        
+        .education-item p {
+            color: var(--slate);
+            line-height: 1.8;
+            font-size: clamp(15px, 2vw, 16px);
+        }
+        
+        /* Skills Section - 3 Boxes */
+        #skills {
+            background-color: var(--dark-blue);
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .skill-category {
+            background: rgba(100, 255, 218, 0.05);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            transition: var(--transition);
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-10px);
+            border-color: var(--light-blue);
+            box-shadow: 0 10px 20px rgba(100, 255, 218, 0.1);
+        }
+        
+        .skill-category h3 {
+            color: var(--lightest-slate);
+            margin-bottom: 20px;
+            font-size: clamp(20px, 3vw, 22px);
+        }
+        
+        .skill-item {
+            margin-bottom: 20px;
+        }
+        
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .skill-name {
+            color: var(--lightest-slate);
+            font-size: clamp(15px, 2vw, 16px);
+        }
+        
+        .skill-percent {
+            color: var(--light-blue);
+            font-size: clamp(15px, 2vw, 16px);
+        }
+        
+        .skill-bar {
+            height: 6px;
+            background-color: rgba(100, 255, 218, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background-color: var(--light-blue);
+            border-radius: 3px;
+            position: relative;
+        }
+        
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 2s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        
+        .tech-item {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--light-blue);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: clamp(14px, 2vw, 15px);
+            border: 1px solid var(--light-blue);
+            transition: var(--transition);
+        }
+        
+        .tech-item:hover {
+            background: var(--light-blue);
+            color: var(--dark-blue);
+            transform: translateY(-3px);
+        }
+        
+        /* Contact Section */
+        #contact {
+            background-color: var(--dark-blue);
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--lightest-slate);
+            font-size: clamp(16px, 2vw, 18px);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 1px solid var(--slate);
+            border-radius: 5px;
+            color: var(--lightest-slate);
+            transition: var(--transition);
+            font-size: clamp(15px, 2vw, 16px);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--light-blue);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: transparent;
+            color: var(--light-blue);
+            border: 1px solid var(--light-blue);
+            padding: 15px 30px;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            z-index: 1;
+            width: 100%;
+            font-size: clamp(16px, 2vw, 18px);
+        }
+        
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(100, 255, 218, 0.1);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .submit-btn:hover {
+            color: var(--dark-blue);
+        }
+        
+        .submit-btn:hover::before {
+            left: 0;
+            background: var(--light-blue);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #020c1b;
+            text-align: center;
+            padding: 20px;
+            font-size: clamp(14px, 2vw, 16px);
+            color: var(--slate);
+        }
+        
+        /* Particle Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.3;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+            }
+            
+            .profile-image {
+                width: 250px;
+                height: 250px;
+                margin: 0 auto;
+            }
+            
+            .education-container {
+                flex-direction: column;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 5%;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .page {
+                padding: 80px 5%;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 250px;
+                margin: 0 auto;
+            }
+            
+            .tech-stack {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">MyPortfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">My Journey</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="page active">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Hi, I'm Kavin Kumar</h1>
+                <h2>Associate Software Engineer</h2>
+                <p>I specialize in developing high-performance embedded solutions for automotive and industrial applications. With expertise in C/C++, RTOS, and Linux, I build robust systems that push technological boundaries.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn">Hire Me</a>
+                    <a href="#contact" class="btn">Let's Talk</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="page">
+        <div class="section-title">
+            <h2>About Me</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Hi there! I'm an Associate Software Engineer with 2+ years of experience working on cutting-edge embedded systems at Tech Mahindra. My journey in technology began with a fascination for low-level programming and hardware-software integration.</p>
+                <p>I've contributed to projects for industry leaders like NVIDIA and AMD, specializing in QNX FastBoot, generative AI implementations, and custom BSP development. My work focuses on optimizing system performance while ensuring reliability in automotive and IoT environments.</p>
+                <p>Beyond technical skills, I'm passionate about creating solutions that bridge the gap between hardware capabilities and software requirements, delivering seamless user experiences in constrained environments.</p>
+                
+                <div class="tech-stack">
+                    <div class="tech-item">QNX Neutrino RTOS</div>
+                    <div class="tech-item">Embedded Linux</div>
+                    <div class="tech-item">Yocto Project</div>
+                    <div class="tech-item">ROS 2</div>
+                    <div class="tech-item">TensorFlow Lite</div>
+                    <div class="tech-item">NVIDIA Jetson</div>
+                    <div class="tech-item">CAN FD</div>
+                    <div class="tech-item">Networking</div>
+                </div>
+            </div>
+            <img src="your-profile-image.jpg" alt="Profile Photo" class="profile-image">
+        </div>
+    </section>
+
+    <!-- Education Section - Split Layout -->
+    <section id="education" class="page">
+        <div class="section-title">
+            <h2>My Journey</h2>
+        </div>
+        
+        <div class="education-container">
+            <!-- Left Column - Education -->
+            <div class="education-column">
+                <div class="education-item">
+                    <div class="education-date">2011 - 2012</div>
+                    <h3>SSLC</h3>
+                    <h4>Our Lady's Hr.Sec.School</h4>
+                    <p>Completed my schooling at Our Lady's Hr.Sec.School and achieving an impressive score of 81% in SSLC exams. Completing secondary school is a significant accomplishment, and this achievement reflects my hard work and dedication.</p>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-date">2013 - 2014</div>
+                    <h3>HSC</h3>
+                    <h4>Our Lady's Hr.Sec.School</h4>
+                    <p>Successfully completed my higher secondary education (HSE) at Our Lady's Hr.Sec.School, achieved a score of 60%. This accomplishment is a testament to my dedication and hard work throughout my academic journey.</p>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-date">2014 - 2018</div>
+                    <h3>Bachelor's Degree</h3>
+                    <h4>SNS College of Technology</h4>
+                    <p>Pursued my Bachelor's degree in Electrical and Electronics Engineering (EEE) at SNS College of Technology, where I have maintained a CGPA of 6.4. Throughout my academic journey, I have demonstrated a strong aptitude for technology and a keen interest in the ever-evolving field of Embedded Systems.</p>
+                </div>
+            </div>
+            
+            <!-- Right Column - Projects -->
+            <div class="education-column">
+                <div class="education-item">
+                    <div class="education-date">2024 - Present</div>
+                    <h3>AMD BIOS Development & Testing</h3>
+                    <h4>Embedded Systems</h4>
+                    <p>Led comprehensive BIOS validation for automotive apps, optimizing AMD AGESA firmware, Secure Boot/PSP, PCIe, memory, and AMD iPXE bootloader. Managed power/thermal testing for Ryzen, updated BIOS via DediProg, and documented results for enhanced system reliability and performance.</p>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-date">2023 - 2024</div>
+                    <h3>NVIDIA Camera SW SCA</h3>
+                    <h4>Embedded Camera Software</h4>
+                    <p>Performed static code analysis on NVIDIA Tegra camera software, addressing AUTOSAR C++ and MISRA C violations. Enhanced system performance, developed unit tests using VectorCast, reviewed coverage metrics, managed GVS triggers, ran regression tests, and maintained codebase via Git.</p>
+                </div>
+                
+                <div class="education-item">
+                    <div class="education-date">2022 - 2023</div>
+                    <h3>Advanced Embedded HMI and Camera Integration for Automotive Displays</h3>
+                    <h4>Automotive Embedded System, OpenCV and HMI</h4>
+                    <p>Developed 3D automotive HMI and video stitching solutions using C++, Qt/QML, and Python on NXP and Jetson platforms. Built TCP socket communication for instrument clusters and implemented multi-camera panoramic stitching with feature matching, calibration, and performance validation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section - 3 Boxes -->
+    <section id="skills" class="page">
+        <div class="section-title">
+            <h2>Technical Expertise</h2>
+        </div>
+        
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Embedded Development</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">C/C++</span>
+                        <span class="skill-percent">95%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">RTOS (QNX/FreeRTOS)</span>
+                        <span class="skill-percent">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">Linux BSP</span>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">Device Drivers</span>
+                        <span class="skill-percent">88%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 88%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Hardware & Protocols</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">ARM Cortex-M/A</span>
+                        <span class="skill-percent">92%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">I2C/SPI/UART</span>
+                        <span class="skill-percent">90%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">CAN/CAN FD</span>
+                        <span class="skill-percent">85%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">Networking</span>
+                        <span class="skill-percent">80%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h3>Emerging Technologies</h3>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">Embedded AI</span>
+                        <span class="skill-percent">70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 80%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">ROS 2</span>
+                        <span class="skill-percent">60%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">Functional Safety (ISO 26262)</span>
+                        <span class="skill-percent">72%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 82%"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-info">
+                        <span class="skill-name">AI-Driven Networking</span>
+                        <span class="skill-percent">70%</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="page">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+        </div>
+        
+        <div class="contact-form">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Your name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" class="form-control" placeholder="your.email@example.com">
+            </div>
+            <div class="form-group">
+                <label for="phone">Mobile Number</label>
+                <input type="tel" id="phone" class="form-control" placeholder="+91 9876543210">
+            </div>
+            <div class="form-group">
+                <label for="subject">Email Subject</label>
+                <input type="text" id="subject" class="form-control" placeholder="Regarding">
+            </div>
+            <div class="form-group">
+                <label for="message">Your Message</label>
+                <textarea id="message" class="form-control" placeholder="Hello Kavin, I'd like to discuss..."></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Copyright © 2025 | Designed and Built by Kavin Kumar P.G. | All Rights Reserved</p>
+    </footer>
+
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Initialize particles.js
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#64ffda"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 2,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#64ffda",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": true,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+
+        // Enhanced page transition animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const pages = document.querySelectorAll('.page');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, {
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
+            });
+            
+            pages.forEach(page => {
+                observer.observe(page);
+            });
+            
+            // Smooth scrolling for navigation
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
